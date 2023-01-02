@@ -1,4 +1,5 @@
-FROM node:19.3.0-bullseye
+ARG FROM_VER
+FROM node:${FROM_VER:-19.3.0-bullseye}
 
 RUN apt update && \
     apt install -y \
