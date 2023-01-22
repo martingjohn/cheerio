@@ -1,2 +1,2 @@
-REPO=node
+REPO=mcr.microsoft.com/playwright
 TAG=latest

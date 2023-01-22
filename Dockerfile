@@ -1,13 +1,15 @@
 ARG FROM_VER
-FROM node:${FROM_VER:-19.3.0-bullseye}
-
-RUN apt update && \
-    apt install -y \
-        less \
-        vim
+FROM mcr.microsoft.com/playwright:${FROM_VER:-v1.29.0-focal}
 
 ENV USER cheerio
-RUN useradd -m $USER
+COPY requirements.apt requirements.apt
+RUN useradd -m \
+            -s /bin/bash \
+            -d /app \
+            $USER && \
+    apt update && \
+    xargs apt install -y --no-install-recommends < requirements.apt
+
 USER $USER
 WORKDIR /home/$USER
 
